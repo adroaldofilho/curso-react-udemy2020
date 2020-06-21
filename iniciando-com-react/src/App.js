@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function App (props) {
+
+  const modificarNome = (event) => {
+    console.log(event.target.value);
+  }
+
+  const criaComboBox = () => {
+    const opcoes = ["Fulano", "Cicrano"];
+    const comboBoxOpcoes = opcoes.map(opcao => <option>{opcao}</option>);
+    return (
+      <select>
+        {comboBoxOpcoes}
+      </select>        
+    );
+  }
+
+    const MeuComboBox = () => criaComboBox();
+
+    return (
+      <Fragment>
+        <input className="texto-centralizado" type="text" value={props.nome} onChange={modificarNome}></input>
+        <h1>
+          Olá mundo do {props.nome} sua idade é {props.idade}!
+        </h1>
+        <MeuComboBox />
+      </Fragment>
+    );
 }
 
 export default App;
