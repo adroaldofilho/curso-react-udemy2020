@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ProdutoService from '../../app/produtoService';
 import { withRouter } from 'react-router-dom'
-
+import Card from '../../components/card';
 const estadoInicial = {
     nome: '',
     sku: '',
@@ -29,6 +29,7 @@ class CadastroProduto extends Component {
     }
 
     onSubmit = (event) => {
+        event.preventDefault();
         const produto = {
             nome: this.state.nome,
             sku: this.state.sku,
@@ -64,13 +65,9 @@ class CadastroProduto extends Component {
 
     render() {
         return (
-            <div className="card" >
-                <div className="card-header">
-                    { this.state.atualizando ? 'Atualização ' : 'Cadastro '}
-                    de Produto
-                </div>
-                <div className="card-body">
+            <Card header={this.state.atualizando ? 'Atualização de Produto' : 'Cadastro de Produto'}>
 
+                <form id="frmProduto" onSubmit={this.onSubmit}>
                     {this.state.sucesso &&
                         <div className="alert alert-dismissible alert-success">
                             <button type="button" className="close" data-dismiss="alert">&times;</button>
@@ -165,15 +162,15 @@ class CadastroProduto extends Component {
                     <div className="row">
                         <div className="col-md-1">
                             <button className="btn btn-success"
-                                onClick={this.onSubmit}>Salvar</button>
+                                type="submit">Salvar</button>
                         </div>
                         <div className="col-md-1">
                             <button className="btn btn-primary"
                                 onClick={this.limpaCampos}>Limpar</button>
                         </div>
                     </div>
-                </div>
-            </div>
+                </form>
+            </Card>
         );
     }
 }
